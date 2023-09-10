@@ -8,11 +8,12 @@ import Favs from './Routes/Favs.jsx'
 import Detail from './Routes/Detail.jsx'
 import Contact from './Routes/Contact.jsx'
 import Error from './Components/Error.jsx'
-
+import { ContextProvider } from './Components/utils/global.context.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  
     <BrowserRouter>
+    <ContextProvider>
       <Routes>
         <Route path='/' element={<App />}>
           <Route index element={<Home />}/>
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='*' element={<Error />}/>
         </Route>
       </Routes>
+      </ContextProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  
 )

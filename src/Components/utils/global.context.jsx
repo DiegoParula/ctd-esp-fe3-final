@@ -1,11 +1,15 @@
-import { createContext } from "react";
+import { createContext, useReducer, useContext } from "react";
 
 export const initialState = {theme: "", data: []}
 
-export const ContextGlobal = createContext(undefined);
+export const ContextGlobal = createContext();
 
 export const ContextProvider = ({ children }) => {
   //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
+
+  
+
+  
 
   return (
     <ContextGlobal.Provider value={{}}>
@@ -13,3 +17,5 @@ export const ContextProvider = ({ children }) => {
     </ContextGlobal.Provider>
   );
 };
+
+export const useRecipeStates = () => useContext(ContextGlobal)
