@@ -113,10 +113,25 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-.dark{
+#Dark{
   background-color: #12121296;
   color: white;
 }
-.dark > a {
+#Dark > a {
+  color: white;
+}
+
+#Dark .themeButton{
+  background-color: #12121296;
+  color: white;
+}
+
+#Dark .App{
+  background-color: #12121296;
+  color: white;
+}
+
+#Dark .card{
+  background-color: #12121296;
   color: white;
 }

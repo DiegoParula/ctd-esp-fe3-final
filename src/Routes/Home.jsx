@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Card from '../Components/Card'
+import { useRecipeStates } from '../Components/utils/global.context'
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
-  const[dentists, setDentists] = useState([])
+  const {dentists} = useRecipeStates()
+  /*const[dentists, setDentists] = useState([])
 
   const getDentists = async()=>{
     const res = await fetch("https://jsonplaceholder.typicode.com/users")
@@ -14,7 +16,7 @@ const Home = () => {
 
   useEffect(()=>{
   getDentists()},[])
-
+*/
   return (
     <main className="" >
       <h1>Home</h1>

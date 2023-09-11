@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useRecipeStates } from "./utils/global.context";
-import { useReducer, useState } from "react";
+import { useReducer, useState, useEffect } from "react";
+
+
 
 //obtengo los dentistas del storage
 const getDentistFromStorage = () =>{
@@ -10,11 +12,22 @@ const getDentistFromStorage = () =>{
 }
 //almaceno el dentista en el storage
 const setDentistInStorage = (dentist) =>{
-  const localData = getDentistFromStorage()
+const localData = getDentistFromStorage()
 localData.push(dentist)
 localStorage.setItem("dentists", JSON.stringify(localData))
 }
 
+//almaceno el dentista en el storage
+const deleteDentisInStorage = (dentist) =>{
+  const localData = getDentistFromStorage()
+  console.log(localData)
+  const newDentists = localData.filter((item) => item.id !== dentist.id); 
+  console.log(newDentists)
+  localStorage.setItem("dentists", JSON.stringify(newDentists))
+  
+  return newDentists 
+  
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -23,7 +36,7 @@ const reducer = (state, action) => {
       return {...state, data:[...state.data, action.payload]};
     case 'REMOVE':
       console.log('borrar')
-      const newDentists = state.data.filter((dentist) => dentist.id !== action.payload);        
+      const newDentists = deleteDentisInStorage(action.payload)        
       return {...state, data: newDentists };
     default:
       throw new Error()
@@ -35,43 +48,47 @@ const reducer = (state, action) => {
 
 const Card = ({ name, username, id }) => {
 
+  const {contextTheme} = useRecipeStates()
   //const {dispatch} = useRecipeStates()
 
   const [state, dispatch] = useReducer(reducer, {data: getDentistFromStorage()})
 
-  const [button, setButton] = useState('ADD') 
+  //const [button, setButton] = useState('ADD') 
   
-  const buttonText = () => {
-    return button === 'ADD' ? 'Add fav' : 'Delete fav';
+  const initialStateButton = {
+    buttonText: "Add Fav",
+    buttonValue: "ADD",
   };
-/*
-  const addFav = (e)=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
-    e.preventDefault()   
-    console.log("test")
-    const actionType = state.action.type === 'ADD' ? 'REMOVE' : 'ADD';
-    dispatch({type:actionType, payload: id})
-    //dispatch({type: state.action.type === 'ADD' ? 'ADD' : 'REMOVE', payload: id})
 
+  //pongo el estado del boton dependiendo si esta en el storage o no 
+  //para poder manejar el valor y el texto a mostrar
+  const [buttonState, setButtonState] = useState(
+    localStorage.getItem(`buttonState-${id}`)
+      ? JSON.parse(localStorage.getItem(`buttonState-${id}`))
+      : initialStateButton
+  );
+
+  useEffect(() => {
+    localStorage.setItem(`buttonState-${id}`, JSON.stringify(buttonState));
+  }, [buttonState, id]);
+
+  const addFav = (e) => {
+    e.preventDefault();
+    const newButtonText =
+      buttonState.buttonText === "Add Fav" ? "Delete Fav" : "Add Fav";
+    const newButtonValue =
+      buttonState.buttonValue === "ADD" ? "REMOVE" : "ADD";
+
+    setButtonState({
+      buttonText: newButtonText,
+      buttonValue: newButtonValue,
+  })
+
+  dispatch({type:buttonState.buttonValue, payload: {id: id, name: name, username: username}})
   }
-*/ 
-  
-
-  const addFav = (e)=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
-    e.preventDefault()   
-    console.log(button)
-    
-    const actionType = button === 'ADD' ? 'ADD' : 'REMOVE' ;
-    dispatch({type:actionType, payload: id})
-    button === 'ADD' ? setButton('REMOVE') : setButton('ADD');
-    //dispatch({type: 'ADD', payload: name, username})
-
-  }
-
   return (
     <Link to={'/details/' + id}>
-    <div className="card">
+    <div className="card" id={contextTheme}>
         {/* En cada card deberan mostrar en name - username y el id */}
         <p>Id: {id}</p>
         <h2>Nombre: {name}</h2>
@@ -79,7 +96,7 @@ const Card = ({ name, username, id }) => {
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
 
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton">{buttonText()}</button>
+        <button onClick={addFav} className="favButton">{buttonState.buttonText}</button>
     </div>
     </Link>
   );
