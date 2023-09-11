@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useAsyncValue, useParams } from 'react-router-dom'
-
+import { useRecipeStates } from '../Components/utils/global.context'
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Detail = () => {
+
+  const {contextTheme} = useRecipeStates()
   const [dentist, setDentist] = useState([])
   const params = useParams()
 
@@ -22,16 +24,16 @@ const Detail = () => {
   // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
 
   return (
-    <>
-      <h1>Detail Dentist id </h1>
+    <div className='detailContent'>
+    <div className='detail' id={contextTheme}>
+      <h1>{dentist.name} </h1>
       {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
       {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
-      <p>Name: {dentist.name}</p>
       <p>Email: {dentist.email}</p>
       <p>Phone: {dentist.phone}</p>
       <p>Website: {dentist.website}</p>
-    
-    </>
+      </div>
+    </div>
   )
 }
 /*

@@ -21,9 +21,13 @@ const [contextTheme, setContextTheme] = useState('Light');
   useEffect(()=>{
   getDentists()},[])
 
+  const changeTheme = () => {
+    console.log(contextTheme)
+    setContextTheme(contextTheme === 'Light' ? 'Dark': 'Light')
+  }
 
   return (
-    <ContextGlobal.Provider value={{dentists, contextTheme, setContextTheme}}>
+    <ContextGlobal.Provider value={{dentists, contextTheme, changeTheme}}>
       {children}
     </ContextGlobal.Provider>
   );

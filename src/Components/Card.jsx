@@ -58,6 +58,7 @@ const Card = ({ name, username, id }) => {
   const initialStateButton = {
     buttonText: "Add Fav",
     buttonValue: "ADD",
+    buttonClass: "favButton",
   };
 
   //pongo el estado del boton dependiendo si esta en el storage o no 
@@ -74,14 +75,14 @@ const Card = ({ name, username, id }) => {
 
   const addFav = (e) => {
     e.preventDefault();
-    const newButtonText =
-      buttonState.buttonText === "Add Fav" ? "Delete Fav" : "Add Fav";
-    const newButtonValue =
-      buttonState.buttonValue === "ADD" ? "REMOVE" : "ADD";
+    const newButtonText = buttonState.buttonText === "Add Fav" ? "Delete Fav" : "Add Fav";
+    const newButtonValue = buttonState.buttonValue === "ADD" ? "REMOVE" : "ADD";
+    const newButtonclass = buttonState.buttonClass === "favButton" ? "deleteFavButton" : "favButton"
 
     setButtonState({
       buttonText: newButtonText,
       buttonValue: newButtonValue,
+      buttonClass: newButtonclass
   })
 
   dispatch({type:buttonState.buttonValue, payload: {id: id, name: name, username: username}})
@@ -91,12 +92,13 @@ const Card = ({ name, username, id }) => {
     <div className="card" id={contextTheme}>
         {/* En cada card deberan mostrar en name - username y el id */}
         <p>Id: {id}</p>
-        <h2>Nombre: {name}</h2>
-        <h2>Apellido: {username}</h2>
+        <img className='card__avatar' src="/images/doctor.jpg" alt="" />
+        <h2>{name}</h2>
+        <h3>{username}</h3>
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
 
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton">{buttonState.buttonText}</button>
+        <button onClick={addFav} className={buttonState.buttonClass}>{buttonState.buttonText}</button>
     </div>
     </Link>
   );

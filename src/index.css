@@ -12,10 +12,37 @@ code {
     monospace;
 }
 .favButton{
-  background-color: rgba(136, 136, 136, 0.116);
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+  cursor: pointer;
+  /*background-color: rgba(136, 136, 136, 0.116);
   padding: 10px;
   border: none;
   width: 100%;
+  cursor: pointer;*/
+}
+
+.deleteFavButton{
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(0deg, rgba(230, 34, 34	
+  ,1) 0%, rgba(230, 34, 34	
+  ,1) 100%);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #811010;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
   cursor: pointer;
 }
 
@@ -25,10 +52,48 @@ h1{
 
 nav{
   display: flex;
-  width: 80vw;
-  justify-content: flex-start;
+  min-width: 80vw;
+  justify-content: space-between;
   padding: 1rem;
 }
+
+.linkButton {
+  border: none;
+  background: none;
+}
+
+.linkButton span {
+  padding-bottom: 7px;
+  letter-spacing: 4px;
+  font-size: 14px;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+
+.hover-underline-animation {
+  position: relative;
+  color: black;
+  padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.linkButton:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 
 a{
   color: #000;
@@ -39,6 +104,33 @@ a{
 a:hover{
   color: rgb(136, 136, 136);
 } 
+
+.themeButton{
+  position: relative;
+  display: inline-block;
+  margin: 15px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #313131;
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid #313131;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 0 #313131;
+}
+
+.themeButton:hover {
+  color: white;
+  box-shadow: inset 0 -100px 0 0 #313131;
+}
+
+.themeButton:active {
+  transform: scale(0.9);
+}
 
 footer {
   display: flex;
@@ -71,17 +163,33 @@ form{
 }
 
 .card{
+  position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  padding: 32px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: white;
+  /*background: #2c2c2c;*/
+  border: 2px solid #313131;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+ /* display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
   width: 200px;
   padding: 0.5rem 0.5rem 0 0.5rem;
-  border: 0.5px solid rgb(136, 136, 136);
+  border: 0.5px solid rgb(136, 136, 136);*/
 }
 
 .card:hover{
-  border: 0.5px solid rgb(206, 217, 142);
+  box-shadow: 0 0 20px rgba(9, 117, 241, 0.8);
+  border-color: #0974f1;
+  /*border: 0.5px solid rgb(206, 217, 142);*/
 }
 
 .card-grid{
@@ -92,6 +200,18 @@ form{
   height: auto;
   flex-wrap: wrap;
   margin: 0 auto;
+}
+
+.card__avatar {
+ 
+  width: 114px;
+  height: 114px;
+  background: var(--bg-color);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: calc(50% - 57px);
 }
 
 table {
@@ -113,6 +233,93 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
+.form {
+  background-color: #fff;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  display: block;
+  padding: 1rem;
+  min-width: 350px;
+  min-height: 350px;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: #000;
+}
+
+.form-subtitle{
+  text-align: center;
+  color: #000;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-container input, .form button {
+  outline: none;
+  border: 1px solid #e5e7eb;
+  margin: 8px 0;
+  flex: 1; 
+}
+
+.input-container input {
+  background-color: #fff;
+  padding: 1rem;
+  padding-right: 3rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: 300px;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.submit {
+  display: block;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  background-color: #4F46E5;
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  width: 100%;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+}
+
+.detailContent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  min-height: 254px;
+  background: white;
+  border-radius: 10px;
+  transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(190, 190, 190),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
 #Dark{
   background-color: #12121296;
   color: white;
@@ -122,16 +329,79 @@ tr:nth-child(even) {
 }
 
 #Dark .themeButton{
-  background-color: #12121296;
   color: white;
+  background: #ad5389;
+  background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
 }
 
-#Dark .App{
+/*#Dark .App{
   background-color: #12121296;
   color: white;
-}
+}*/
 
 #Dark .card{
   background-color: #12121296;
   color: white;
+}
+
+#Dark .form {
+  background-color: #12121296;
+  color: white;
+}
+
+#Dark .form-title {
+  color: white;
+}
+
+#Dark .form-subtitle {
+  color: white;
+}
+
+#Dark .themeButton{
+  position: relative;
+  display: inline-block;
+  margin: 15px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid white;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 0 white;
+}
+
+#Dark .themeButton:hover {
+  color: #313131;
+  box-shadow: inset 0 -100px 0 0 white;
+}
+
+#Dark .themeButton:active {
+  transform: scale(0.9);
+}
+
+#Dark .detail{
+  box-shadow: inset 0 -3em 3em rgba(255, 252, 252, 0.1),
+             0 0  0 2px rgb(190, 190, 190),
+             0.3em 0.3em 1em rgba(255, 255, 255, 0.438);
+}
+
+#Dark .hover-underline-animation {
+
+  color: white;
+  
+}
+
+.hover-underline-animation:after {
+ 
+  background-color: white;
+  ;
 }

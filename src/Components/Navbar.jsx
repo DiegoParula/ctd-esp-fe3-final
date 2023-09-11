@@ -6,22 +6,30 @@ import { useRecipeStates } from './utils/global.context'
 
 const Navbar = () => {
 
-  const {contextTheme, setContextTheme } = useRecipeStates()
+  const {contextTheme, changeTheme } = useRecipeStates()
 
-  const changeTheme = () => {
-    console.log(contextTheme)
-    setContextTheme(contextTheme === 'Light' ? 'Dark': 'Light')
-  }
+
 
    return (
     <nav >
+      <div>
+        
+      </div>
       <div >
       {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
       {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-      <Link to='/'>Home</Link>
-      <Link to='/favs'>Favs</Link>
-      <Link to='/contact'>Contact</Link>
-      <button className="themeButton" onClick={changeTheme}>Change theme</button>
+      <Link className= 'linkButton' to='/'>
+       <span className='hover-underline-animation'>Home</span> 
+      </Link>
+      <Link className= 'linkButton' to='/favs'>
+        <span className='hover-underline-animation'>Favs</span>
+      </Link>
+      <Link className= 'linkButton' to='/contact'>
+        <span className='hover-underline-animation'>Contact</span>
+      </Link>
+      <button className="themeButton" onClick={changeTheme}>
+      {contextTheme === 'Light' ? 'Dark ' : 'Light'}
+      </button>
       </div>
     </nav>
   )

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-
+import { useRecipeStates } from "./utils/global.context";
 
 const Form = () => {
+
+  const {contextTheme} = useRecipeStates()
+
   //Aqui deberan implementar el form completo con sus validaciones
   const [contact, setContact] = useState({
     name:'',
@@ -42,21 +45,28 @@ const Form = () => {
 
   return (
     <div>
-      <form onSubmit={onSubmitForm}>
+      <form className='form' id={contextTheme} onSubmit={onSubmitForm}>
+      <p className="form-title">Want to know more?</p>
+      <p className="form-subtitle">Send us your questions and we will contact you</p> 
+       <div className="input-container">
         <input 
           type="text"
           placeholder="Name" 
           value={contact.name}
           onChange={(e) => setContact({...contact, name: e.target.value})}
         />
+        </div>
+        <div className="input-container">
         <input 
           type="mail" 
           placeholder="Mail"
           value={contact.mail}
           onChange={(e) => setContact({...contact, mail: e.target.value})}
         />
-
-        <button type='submit'>Send</button>
+        </div>
+        <div>
+        <button className='submit' type='submit'>Send</button>
+        </div>
       </form>
     </div>
   );
