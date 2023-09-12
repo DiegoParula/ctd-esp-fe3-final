@@ -88,8 +88,9 @@ const Card = ({ name, username, id }) => {
   dispatch({type:buttonState.buttonValue, payload: {id: id, name: name, username: username}})
   }
   return (
-    <Link to={'/details/' + id}>
     <div className="card" id={contextTheme}>
+    <Link className="linkCard" to={'/details/' + id}>
+    
         {/* En cada card deberan mostrar en name - username y el id */}
         <p>Id: {id}</p>
         <img className='card__avatar' src="/images/doctor.jpg" alt="" />
@@ -98,9 +99,11 @@ const Card = ({ name, username, id }) => {
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
 
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className={buttonState.buttonClass}>{buttonState.buttonText}</button>
-    </div>
+        
+    
     </Link>
+    <button onClick={addFav} className={buttonState.buttonClass}>{buttonState.buttonText}</button>
+    </div>
   );
 };
 

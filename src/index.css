@@ -168,7 +168,7 @@ form{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 320px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   padding: 32px;
@@ -201,6 +201,14 @@ form{
   height: auto;
   flex-wrap: wrap;
   margin: 0 auto;
+}
+
+.linkCard{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .card__avatar {
