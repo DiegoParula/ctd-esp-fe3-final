@@ -13,16 +13,8 @@ import { ContextProvider } from './Components/utils/global.context.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   
     <BrowserRouter>
-    <ContextProvider>
-      <Routes>
-        <Route path='/' element={<App />}>
-          <Route index element={<Home />}/>
-          <Route path='/favs' element={<Favs />}/>
-          <Route path='/details/:id' element={<Detail />}/>
-          <Route path='/contact' element={<Contact />}/>
-          <Route path='*' element={<Error />}/>
-        </Route>
-      </Routes>
+      <ContextProvider>
+        <App />
       </ContextProvider>
     </BrowserRouter>
   
