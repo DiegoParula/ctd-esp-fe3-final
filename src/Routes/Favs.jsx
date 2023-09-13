@@ -18,7 +18,7 @@ const Favs = () => {
   
 
   useEffect(()=>{
-    setDentists(getDentistFromStorage()) },[localStorage])
+    setDentists(getDentistFromStorage()) },[])
   return (
     <>
       <h1>Dentists Favs</h1>
