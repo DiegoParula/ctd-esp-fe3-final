@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useRecipeStates } from "./utils/global.context";
 import { useReducer, useState, useEffect } from "react";
-
+import { useRecipeButton } from "./utils/button.context";
 
 /*
 //obtengo los dentistas del storage
@@ -49,13 +49,15 @@ const reducer = (state, action) => {
 const Card = ({ dentist }) => {
 
   const {state, dispatch} = useRecipeStates()
+  const { buttonStates, updateButtonState } = useRecipeButton
   //const {dispatch} = useRecipeStates()
 
   //const [state, dispatch] = useReducer(reducer, {data: getDentistFromStorage()})
 
   //const [button, setButton] = useState('ADD') 
-  
+  /*
   const initialStateButton = {
+    
     buttonText: "Add Fav",
     buttonValue: "ADD",
     buttonClass: "favButton",
@@ -72,8 +74,34 @@ const Card = ({ dentist }) => {
   useEffect(() => {
     localStorage.setItem(`buttonState-${dentist.id}`, JSON.stringify(buttonState));
   }, [buttonState, dentist.id]);
-
+  */
   const addFav = (e) => {
+    e.preventDefault();
+    const newButtonText =
+      buttonStates[dentist.id]?.buttonText === "Add Fav"
+        ? "Delete Fav"
+        : "Add Fav";
+    const newButtonValue =
+      buttonStates[dentist.id]?.buttonValue === "ADD" ? "REMOVE" : "ADD";
+    const newButtonClass =
+      buttonStates[dentist.id]?.buttonClass === "favButton"
+        ? "deleteFavButton"
+        : "favButton";
+
+    const newButtonState = {
+      buttonText: newButtonText,
+      buttonValue: newButtonValue,
+      buttonClass: newButtonClass,
+    };
+
+    // Actualiza el estado del botón específico del dentista utilizando el contexto
+    updateButtonState(dentist.id, newButtonState);
+
+    dispatch({ type: newButtonValue, payload: dentist });
+  };
+
+    /*
+  
     e.preventDefault();
     const newButtonText = buttonState.buttonText === "Add Fav" ? "Delete Fav" : "Add Fav";
     const newButtonValue = buttonState.buttonValue === "ADD" ? "REMOVE" : "ADD";
@@ -86,7 +114,7 @@ const Card = ({ dentist }) => {
   })
   console.log(dentist)
   dispatch({type:buttonState.buttonValue, payload: dentist})
-  }
+  }*/
   return (
     <div className="card" id={state.theme}>
     <Link className="linkCard" to={'/details/' + dentist.id}>
@@ -102,7 +130,9 @@ const Card = ({ dentist }) => {
         
     
     </Link>
-    <button onClick={addFav} className={buttonState.buttonClass}>{buttonState.buttonText}</button>
+    
+
+    <button onClick={addFav} className={buttonStates[dentist.id]?.buttonClass}>{buttonStates[dentist.id]?.buttonText}</button>
     </div>
   );
 };

@@ -9,12 +9,15 @@ import Detail from './Routes/Detail.jsx'
 import Contact from './Routes/Contact.jsx'
 import Error from './Components/Error.jsx'
 import { ContextProvider } from './Components/utils/global.context.jsx'
+import { ButtonStateProvider } from './Components/utils/button.context.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   
     <BrowserRouter>
       <ContextProvider>
+        <ButtonStateProvider>
         <App />
+        </ButtonStateProvider>
       </ContextProvider>
     </BrowserRouter>
   

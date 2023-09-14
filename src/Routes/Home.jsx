@@ -17,7 +17,10 @@ const Home = () => {
 
   useEffect(()=>{
   getDentists()},[])
+
 */
+
+
   return (
     <main className="" >
       <h1>Home</h1>
