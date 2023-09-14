@@ -6,7 +6,7 @@ import { useRecipeStates } from './utils/global.context'
 
 const Navbar = () => {
 
-  const {contextTheme, changeTheme } = useRecipeStates()
+  const { state, changeTheme } = useRecipeStates()
 
 
 
@@ -28,7 +28,7 @@ const Navbar = () => {
         <span className='hover-underline-animation'>Contact</span>
       </Link>
       <button className="themeButton" onClick={changeTheme}>
-      {contextTheme === 'Light' ? 'Dark ' : 'Light'}
+      {state.theme === 'Light' ? 'Dark ' : 'Light'}
       </button>
       </div>
     </nav>

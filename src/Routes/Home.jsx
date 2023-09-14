@@ -5,7 +5,8 @@ import { useRecipeStates } from '../Components/utils/global.context'
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
-  const {dentists} = useRecipeStates()
+  const {state} = useRecipeStates()
+  const {dentists} = state
   /*const[dentists, setDentists] = useState([])
 
   const getDentists = async()=>{
@@ -22,7 +23,7 @@ const Home = () => {
       <h1>Home</h1>
       <div className='card-grid' >
         {/* Aqui deberias renderizar las cards */}
-          {dentists.length ? dentists.map(dentist =>(<Card key={dentist.id} id={dentist.id} name={dentist.name} username={dentist.username}/> )): null}
+          {dentists.length ? dentists.map(dentist =>(<Card key={dentist.id} dentist={dentist}/> )): null}
       </div>
     </main>
   )

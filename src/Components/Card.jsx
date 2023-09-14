@@ -4,7 +4,7 @@ import { useRecipeStates } from "./utils/global.context";
 import { useReducer, useState, useEffect } from "react";
 
 
-
+/*
 //obtengo los dentistas del storage
 const getDentistFromStorage = () =>{
   const localData = localStorage.getItem("dentists")
@@ -45,13 +45,13 @@ const reducer = (state, action) => {
 
 
 }
+*/
+const Card = ({ dentist }) => {
 
-const Card = ({ name, username, id }) => {
-
-  const {contextTheme} = useRecipeStates()
+  const {state, dispatch} = useRecipeStates()
   //const {dispatch} = useRecipeStates()
 
-  const [state, dispatch] = useReducer(reducer, {data: getDentistFromStorage()})
+  //const [state, dispatch] = useReducer(reducer, {data: getDentistFromStorage()})
 
   //const [button, setButton] = useState('ADD') 
   
@@ -64,14 +64,14 @@ const Card = ({ name, username, id }) => {
   //pongo el estado del boton dependiendo si esta en el storage o no 
   //para poder manejar el valor y el texto a mostrar
   const [buttonState, setButtonState] = useState(
-    localStorage.getItem(`buttonState-${id}`)
-      ? JSON.parse(localStorage.getItem(`buttonState-${id}`))
+    localStorage.getItem(`buttonState-${dentist.id}`)
+      ? JSON.parse(localStorage.getItem(`buttonState-${dentist.id}`))
       : initialStateButton
   );
 
   useEffect(() => {
-    localStorage.setItem(`buttonState-${id}`, JSON.stringify(buttonState));
-  }, [buttonState, id]);
+    localStorage.setItem(`buttonState-${dentist.id}`, JSON.stringify(buttonState));
+  }, [buttonState, dentist.id]);
 
   const addFav = (e) => {
     e.preventDefault();
@@ -84,18 +84,18 @@ const Card = ({ name, username, id }) => {
       buttonValue: newButtonValue,
       buttonClass: newButtonclass
   })
-
-  dispatch({type:buttonState.buttonValue, payload: {id: id, name: name, username: username}})
+  console.log(dentist)
+  dispatch({type:buttonState.buttonValue, payload: dentist})
   }
   return (
-    <div className="card" id={contextTheme}>
-    <Link className="linkCard" to={'/details/' + id}>
+    <div className="card" id={state.theme}>
+    <Link className="linkCard" to={'/details/' + dentist.id}>
     
         {/* En cada card deberan mostrar en name - username y el id */}
-        <p>Id: {id}</p>
+        <p>Id: {dentist.id}</p>
         <img className='card__avatar' src="/images/doctor.jpg" alt="" />
-        <h2>{name}</h2>
-        <h3>{username}</h3>
+        <h2>{dentist.name}</h2>
+        <h3>{dentist.username}</h3>
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
 
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}

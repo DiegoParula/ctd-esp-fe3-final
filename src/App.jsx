@@ -11,9 +11,9 @@ import Contact from './Routes/Contact.jsx'
 import Error from './Components/Error.jsx'
 
 function App() {
-  const {contextTheme} = useRecipeStates()
+  const {state} = useRecipeStates()
   return (
-      <div className="App" id={contextTheme}>
+      <div className="App" id={state.theme}>
           <Navbar/>
           <Routes>
         
