@@ -7,7 +7,7 @@ const Card = ({ dentist }) => {
   const { favs } = state;
 
   const isFavorite = favs.some((fav) => fav.id === dentist.id);
-  console.log(state.favs);
+  
 
   const addFav = (e) => {
     e.preventDefault();

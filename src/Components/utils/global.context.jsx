@@ -39,9 +39,7 @@ const setDentistInStorage = (dentist) => {
 //elimino el dentista en el storage
 const deleteDentisInStorage = (dentist) => {
   const localData = JSON.parse(localStorage.getItem("favs"));
-  console.log(localData);
   const newDentists = localData.filter((item) => item.id !== dentist.id);
-  console.log(newDentists);
   localStorage.setItem("favs", JSON.stringify(newDentists));
 
   return newDentists;

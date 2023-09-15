@@ -9,8 +9,11 @@ import Detail from "./Routes/Detail.jsx";
 import Contact from "./Routes/Contact.jsx";
 import Error from "./Components/Error.jsx";
 
+
 function App() {
   const { state } = useRecipeStates();
+
+
 
   return (
     <div className="App" id={state.theme}>
