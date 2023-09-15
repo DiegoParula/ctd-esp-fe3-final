@@ -5,12 +5,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+
 .favButton{
   font-weight: 500;
   font-size: 16px;
@@ -23,11 +30,7 @@ code {
   letter-spacing: 0.05em;
   border-radius: 20em;
   cursor: pointer;
-  /*background-color: rgba(136, 136, 136, 0.116);
-  padding: 10px;
-  border: none;
-  width: 100%;
-  cursor: pointer;*/
+
 }
 
 .deleteFavButton{
@@ -53,8 +56,16 @@ h1{
 nav{
   display: flex;
   min-width: 80vw;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 1rem;
+  
+}
+
+
+
+.logo-dentist > img{
+  width: 100px;
+  margin: 0;
 }
 
 .linkButton {
@@ -65,10 +76,11 @@ nav{
 .linkButton span {
   padding-bottom: 7px;
   letter-spacing: 4px;
-  font-size: 14px;
+  font-size: 20px;
   padding-right: 15px;
   color: black;
   text-transform: uppercase;
+  
 }
 
 .hover-underline-animation {
@@ -133,26 +145,48 @@ a:hover{
   transform: scale(0.9);
 }
 
+
+
 footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
   padding: 2rem;
   position: relative;
   bottom: 0;
   width: 90%;
-  height: 40px;
+  min-height: 40px;
   margin-top: 2rem;
 }
 
-footer > img{
+.img-dh{
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 2rem;
+
+}
+
+.img-dh > img{
   width: 200px;
   margin: 0;
 }
-footer > p{
+.img-dh > p{
   margin: 0;
   padding-top: 0.7rem;
 }
+
+.img-smedia{
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+}
+
+.img-smedia > img{
+  width: 40px;
+  margin: 5px;
+}
+
 
 form{
   display: flex;
@@ -175,22 +209,15 @@ form{
   overflow: hidden;
   border-radius: 10px;
   background: white;
-  /*background: #2c2c2c;*/
   border: 2px solid #313131;
   transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
- /* display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  align-items: center;
-  width: 200px;
-  padding: 0.5rem 0.5rem 0 0.5rem;
-  border: 0.5px solid rgb(136, 136, 136);*/
+ 
 }
 
 .card:hover{
   box-shadow: 0 0 20px rgba(9, 117, 241, 0.8);
   border-color: #0974f1;
-  /*border: 0.5px solid rgb(206, 217, 142);*/
+
 }
 
 .card-grid{
@@ -223,28 +250,9 @@ form{
   top: calc(50% - 57px);
 }
 
-table {
- border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    display: table;
-    border: 1px solid #ccc;
-
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
 .form {
   background-color: #fff;
-    display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   display: block;
@@ -409,7 +417,7 @@ tr:nth-child(even) {
   
 }
 
-.hover-underline-animation:after {
+#Dark .hover-underline-animation:after {
  
   background-color: white;
   ;

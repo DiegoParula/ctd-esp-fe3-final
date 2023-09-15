@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../Components/Card";
-import { useEffect, useState } from "react";
 import { useRecipeStates } from "../Components/utils/global.context";
 
 const Favs = () => {

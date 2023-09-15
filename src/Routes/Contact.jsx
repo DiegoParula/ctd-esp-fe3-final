@@ -1,16 +1,12 @@
-import React from 'react'
-import Form from '../Components/Form'
-import { useRecipeStates } from '../Components/utils/global.context'
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import React from "react";
+import Form from "../Components/Form";
 
 const Contact = () => {
-  
   return (
     <div>
-      <Form/>
+      <Form />
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
