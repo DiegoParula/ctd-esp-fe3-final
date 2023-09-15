@@ -47,7 +47,7 @@ const Form = () => {
     <div>
       <form className='form' id={contextTheme} onSubmit={onSubmitForm}>
       <p className="form-title">Want to know more?</p>
-      <p className="form-subtitle">Send us your questions and we will contact you</p> 
+      <p className="form-subtitle">Send us your mail and we will contact you</p> 
        <div className="input-container">
         <input 
           type="text"

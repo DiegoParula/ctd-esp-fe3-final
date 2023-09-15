@@ -1,138 +1,43 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useRecipeStates } from "./utils/global.context";
-import { useReducer, useState, useEffect } from "react";
-import { useRecipeButton } from "./utils/button.context";
-
-/*
-//obtengo los dentistas del storage
-const getDentistFromStorage = () =>{
-  const localData = localStorage.getItem("dentists")
-  return localData ? JSON.parse(localData) : []
-}
-//almaceno el dentista en el storage
-const setDentistInStorage = (dentist) =>{
-const localData = getDentistFromStorage()
-localData.push(dentist)
-localStorage.setItem("dentists", JSON.stringify(localData))
-}
-
-//almaceno el dentista en el storage
-const deleteDentisInStorage = (dentist) =>{
-  const localData = getDentistFromStorage()
-  console.log(localData)
-  const newDentists = localData.filter((item) => item.id !== dentist.id); 
-  console.log(newDentists)
-  localStorage.setItem("dentists", JSON.stringify(newDentists))
-  
-  return newDentists 
-  
-}
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD':
-      setDentistInStorage(action.payload)
-      return {...state, data:[...state.data, action.payload]};
-    case 'REMOVE':
-      console.log('borrar')
-      const newDentists = deleteDentisInStorage(action.payload)        
-      return {...state, data: newDentists };
-    default:
-      throw new Error()
-}
 
 
-
-}
-*/
 const Card = ({ dentist }) => {
+  const { state, dispatch } = useRecipeStates();
+  const { favs } = state;
 
-  const {state, dispatch} = useRecipeStates()
-  const { buttonStates, updateButtonState } = useRecipeButton
-  //const {dispatch} = useRecipeStates()
+  const isFavorite = favs.some((fav) => fav.id === dentist.id);
+  console.log(state.favs);
 
-  //const [state, dispatch] = useReducer(reducer, {data: getDentistFromStorage()})
-
-  //const [button, setButton] = useState('ADD') 
-  /*
-  const initialStateButton = {
-    
-    buttonText: "Add Fav",
-    buttonValue: "ADD",
-    buttonClass: "favButton",
-  };
-
-  //pongo el estado del boton dependiendo si esta en el storage o no 
-  //para poder manejar el valor y el texto a mostrar
-  const [buttonState, setButtonState] = useState(
-    localStorage.getItem(`buttonState-${dentist.id}`)
-      ? JSON.parse(localStorage.getItem(`buttonState-${dentist.id}`))
-      : initialStateButton
-  );
-
-  useEffect(() => {
-    localStorage.setItem(`buttonState-${dentist.id}`, JSON.stringify(buttonState));
-  }, [buttonState, dentist.id]);
-  */
   const addFav = (e) => {
     e.preventDefault();
-    const newButtonText =
-      buttonStates[dentist.id]?.buttonText === "Add Fav"
-        ? "Delete Fav"
-        : "Add Fav";
-    const newButtonValue =
-      buttonStates[dentist.id]?.buttonValue === "ADD" ? "REMOVE" : "ADD";
-    const newButtonClass =
-      buttonStates[dentist.id]?.buttonClass === "favButton"
-        ? "deleteFavButton"
-        : "favButton";
 
-    const newButtonState = {
-      buttonText: newButtonText,
-      buttonValue: newButtonValue,
-      buttonClass: newButtonClass,
-    };
-
-    // Actualiza el estado del botón específico del dentista utilizando el contexto
-    updateButtonState(dentist.id, newButtonState);
-
-    dispatch({ type: newButtonValue, payload: dentist });
+    if (isFavorite) {
+      dispatch({ type: "REMOVE", payload: dentist });
+    } else {
+      dispatch({ type: "ADD", payload: dentist });
+    }
   };
-
-    /*
-  
-    e.preventDefault();
-    const newButtonText = buttonState.buttonText === "Add Fav" ? "Delete Fav" : "Add Fav";
-    const newButtonValue = buttonState.buttonValue === "ADD" ? "REMOVE" : "ADD";
-    const newButtonclass = buttonState.buttonClass === "favButton" ? "deleteFavButton" : "favButton"
-
-    setButtonState({
-      buttonText: newButtonText,
-      buttonValue: newButtonValue,
-      buttonClass: newButtonclass
-  })
-  console.log(dentist)
-  dispatch({type:buttonState.buttonValue, payload: dentist})
-  }*/
   return (
     <div className="card" id={state.theme}>
-    <Link className="linkCard" to={'/details/' + dentist.id}>
-    
+      <Link className="linkCard" to={"/details/" + dentist.id}>
         {/* En cada card deberan mostrar en name - username y el id */}
         <p>Id: {dentist.id}</p>
-        <img className='card__avatar' src="/images/doctor.jpg" alt="" />
+        <img className="card__avatar" src="/images/doctor.jpg" alt="" />
         <h2>{dentist.name}</h2>
         <h3>{dentist.username}</h3>
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
 
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        
-    
-    </Link>
-    
+      </Link>
 
-    <button onClick={addFav} className={buttonStates[dentist.id]?.buttonClass}>{buttonStates[dentist.id]?.buttonText}</button>
+      <button
+        onClick={addFav}
+        className={isFavorite ? "deleteFavButton" : "favButton"}
+      >
+        {isFavorite ? "Delete Fav" : "Add Fav"}
+      </button>
     </div>
   );
 };

@@ -9,14 +9,17 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'GET_DENTISTS':
       return {...state, dentists: action.payload}
+    case 'GET_FAVS':
+        console.log(favs)
+        return { ...state, favs: action.payload };  
     case 'ADD':
       setDentistInStorage(action.payload)
-      //console.log(action.payload)
+      console.log(state.favs)
       return {...state, favs:[...state.favs, action.payload]};
     case 'REMOVE':
       console.log('borrar')
       const newDentists = deleteDentisInStorage(action.payload)        
-      return {...state, favs: newDentists };
+      return {...state, favs: newDentists};
     case 'THEME':
       return {...state, theme: action.payload}  
     default:
@@ -29,18 +32,22 @@ const initialFavState = localFavs ? localFavs : []
 
 //almaceno el dentista en el storage
 const setDentistInStorage = (dentist) =>{
-  const localData = JSON.parse(localStorage.getItem("dentists")) || []
-  localData.push(dentist)
-  localStorage.setItem("dentists", JSON.stringify(localData))
+  try {
+    const localData = JSON.parse(localStorage.getItem("favs")) || [];
+    localData.push(dentist);
+    localStorage.setItem("favs", JSON.stringify(localData));
+  } catch (error) {
+    console.error("Error al guardar en localStorage:", error);
+  }
   }
 
 //almaceno el dentista en el storage
 const deleteDentisInStorage = (dentist) =>{
-  const localData = JSON.parse(localStorage.getItem("dentists"))
+  const localData = JSON.parse(localStorage.getItem("favs"))
   console.log(localData)
   const newDentists = localData.filter((item) => item.id !== dentist.id); 
   console.log(newDentists)
-  localStorage.setItem("dentists", JSON.stringify(newDentists))
+  localStorage.setItem("favs", JSON.stringify(newDentists))
   
   return newDentists 
   
@@ -48,10 +55,15 @@ const deleteDentisInStorage = (dentist) =>{
 
 
 
+
+
+
 const initialState = {
   dentists: [],
   favs: initialFavState,
   theme: 'Light',
+  //isFavorite: false
+  
 }
 
 export const ContextProvider = ({ children }) => {
@@ -78,6 +90,8 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(()=>{
   getDentists()},[])
+
+ 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     

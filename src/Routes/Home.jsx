@@ -7,19 +7,6 @@ import { useRecipeStates } from '../Components/utils/global.context'
 const Home = () => {
   const {state} = useRecipeStates()
   const {dentists} = state
-  /*const[dentists, setDentists] = useState([])
-
-  const getDentists = async()=>{
-    const res = await fetch("https://jsonplaceholder.typicode.com/users")
-    const data = await res.json()
-    setDentists(data)
-  }
-
-  useEffect(()=>{
-  getDentists()},[])
-
-*/
-
 
   return (
     <main className="" >
